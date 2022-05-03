@@ -30,47 +30,19 @@
         position: absolute; 
         height: 80px;        
         width: 20px;  
-        background-color: $color-primary;
+        background-color: $color-primary-light;
         &--player1{
                 left: 20px;
+                top: height/2;
         }
         &--player2{
                 right: 20px;
         }
 }
 .ball{
+        position: absolute; 
         height: 20px;        
         width: 20px;  
         border-radius: 50%;
         background-color: $color-ball;
 } 
-
-
-
-
-// button controls 
-//         buttons for 
-//                 play (start/ resume)
-//                 pause
-//                 restart
-//         menu button
-
-// rest of the below will come inside the menu button (for mobile  or for all?)
-
-// sound & mute
-// game instruction
-
-
-
-
-// speed increase
-// level ? with the misses decreasing / increasing to complete the level or end 
-
-// level 1 : relaxed level keep playing witout any end (with scores?) min score 3 to go to unlock next level
-// level 2 : min score 5 to go to next level speed increases
-// level 3 : speed increases
-// ball colour changes with high score , neon colour/ rainbow/ golden ball something special
-
-
-
-
