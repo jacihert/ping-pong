@@ -1,0 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Stardos+Stencil:wght@700&display=swap');
+
+
+$font-score: "Stardos Stencil", sans-serif;
+$font-text: "Cinzel Decorative", serif;
+
+// Variables
+
+$color-board: #2D2B2B;
+$color-primary: #28527a;
+$color-primary-light: #55a5f0;
+$color-ball: #ff0000;
+$color-black: #333333;
+$color-white: #ffffff;
+
+// Reset
+
+*{
+    padding: 0 !important;
+    margin: 0 !important;
+}

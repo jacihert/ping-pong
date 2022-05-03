@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
-    <canvas id="board" class="board" style=" margin:0; padding:0; position:absolute; top:0; left:0">></canvas>
+    <div id="board" class="board">
+        <div id="divider" class="board__divider"></div>
+        <div id="score1" class="score score--player1">123</div>
+        <div id="score2" class="score score--player2">456</div>
+        <div id="paddle1" class="gamePiece paddle paddle--player1"></div>
+        <div id="paddle2" class="gamePiece paddle paddle--player2"></div>
+        <div id="ball" class="gamePiece ball"></div>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>
