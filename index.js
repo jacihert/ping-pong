@@ -98,7 +98,3 @@ document.addEventListener("keydown", (event) => {
             }
     }
 });
-
-//----------------------------------------------------------------------------------------------
-// To DO : when ball touches paddle then to move back. else to stop and score to be calculated 
-//----------------------------------------------------------------------------------------------
