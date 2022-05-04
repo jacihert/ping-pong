@@ -1,9 +1,7 @@
 @use "_base.scss" as *;
 
 .board{
-        
         background-color: $color-board
-        //background-color: rgb(55, 52, 52);       
 }
 .score {
         font-family: $font-score ;  
