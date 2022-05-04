@@ -1,65 +1,89 @@
-// 20 left limit & 20 right limit
-// let speed = 0;
+let interval = null;
+let boardTop = 0;
+let boardBottom = window.innerHeight;
+let boardLeft = 20;
+let boardRight = window.innerWidth-20;
+let ballPositionLeft = window.innerWidth / 2;
+let ballPositionTop = window.innerHeight - 20;
+const initialBallPositionLeft = window.innerWidth / 2;
+const initialBballPositionTop = window.innerHeight - 20;
+let Paddle1PositionLeft = 20;
+let Paddle1PositionTop = window.innerHeight / 2 - 20;
+let Paddle2PositionLeft = window.innerWidth-20-20;
+let Paddle2PositionTop = window.innerHeight / 2;
+let dx = 1;
+let dy = 1;
 
-// initalise paddles & ball positions
+//  initalise paddles & ball positions
 const initialiseAll = () => {
-    //let board = document.getElementById('board')
-    console.log(`height & width of the board is: height ${window.innerHeight} , y: ${window.innerWidth}`);
+        //  initalise paddle positions
+    paddle1.style.top = Paddle1PositionTop + "px";
+    paddle1.style.left = Paddle1PositionLeft + "px";
 
-    //initalise paddle positions
-    initialHeightPaddle1 = window.innerHeight/2
-    paddle1.style.top = initialHeightPaddle1 + 'px'
-    paddle1.style.left = 20 + 'px'
-    paddle1Position = paddle1.getBoundingClientRect()
+    paddle2.style.top = Paddle2PositionTop + "px";
+    paddle2.style.left = Paddle2PositionLeft + "px";
 
-    initialHeightPaddle2 = window.innerHeight/2
-    paddle2.style.top = initialHeightPaddle2 + 'px'  
-    paddle2.style.right = 20 + 'px'      
-    paddle2Position = paddle2.getBoundingClientRect()
+        //   initalise ball  position
+    ball.style.top = initialBballPositionTop + "px";
+    ball.style.left = initialBallPositionLeft + "px";
+    dx = 1;
+    dy = 1;
+    ballPositionLeft = initialBallPositionLeft 
+    ballPositionTop = initialBballPositionTop
 
-    //initalise ball  position
-    initialHeightball = window.innerHeight -20
-    ball.style.top = initialHeightball + 'px'  
-    ball.style.left = window.innerWidth/2 + 'px'   
-    ballPosition = ball.getBoundingClientRect()
+        //  set score
+    document.getElementById("score1").innerHTML = 0;
+    document.getElementById("score2").innerHTML = 0;
+};
 
-    // set score
-    document.getElementById('score1').innerHTML=0
-    document.getElementById('score2').innerHTML=0
-}
+//  Set the ball in motion
+const bouncingBall = () => {
+  if (ballPositionLeft < boardLeft || ballPositionLeft > boardRight-20) {
+    dx = -dx;
+  }
+  if (ballPositionTop < boardTop || ballPositionTop > boardBottom-20) {
+    dy = -dy;
+  }
+  ballPositionLeft -= dx;
+  ballPositionTop += dy;
+  ball.style.left = ballPositionLeft + "px";
+  ball.style.top = ballPositionTop + "px";
+};
 
-// Locate paddles & balls
-const locateGamePieces = () => {
-// get position  -  ball  
-ball = document.getElementById('ball')
-ballPosition = ball.getBoundingClientRect()
-ballPositionLeft = ball.style.left
-ballPositionTop = ball.style.top
-console.log(`Position of the ball is x: ${ballPositionLeft} , y: ${ballPositionTop}`);
+initialiseAll();
+document.addEventListener("keydown", (event) => {
+    console.log(event.key);
+    // Play
+    if (!interval && (event.key === "P" || event.key === "p")) {
+    interval = setInterval(bouncingBall, 1/10);
+    }
+    // Stop / pause
+    if (event.key === "S" || event.key === "s") {
+    clearInterval(interval);
+    interval = null;
+    }
+    // Restart
+    if (!interval && (event.key === "R" || event.key === "r")) {
+    clearInterval(interval);
+    interval = null;
+    initialiseAll();
+    interval = setInterval(bouncingBall, 1/10);
+    }
+                // if(event.key==="ArrowLeft"){   //move paddle up
+// if(event.key==="ArrowUp"){
+//     //interval = setInterval(moveLeft, 1);
+// }
+                // if(event.key==="ArrowRight") {     //move paddle down
+// if(event.key==="ArrowDown"){
+//     //interval = setInterval(moveRight, 1);
+// }
+});
 
-// get position  -  paddle 1
-paddle1 = document.getElementById('paddle1')
-paddle1Position = paddle1.getBoundingClientRect()
-paddle1PositionLeft = paddle1.style.left
-paddle1PositionTop = paddle1.style.top
-console.log(`Position of the paddle1 is x: ${paddle1PositionLeft} , y: ${paddle1PositionTop}`);
+//----------------------------------------------------------------------------------------------
+// move the ball from top left to bottom right and so on 
 
-// get position  -  paddle 2
-paddle2 = document.getElementById('paddle2')
-paddle2Position = paddle2.getBoundingClientRect()
-paddle2PositionLeft = paddle2.style.left // NOT WORKING!
-paddle2PositionTop = paddle2.style.top
-console.log(`Position of the paddle2 is x: ${paddle2PositionLeft} , y: ${paddle2PositionTop}`);
-}
+// when ball touches paddle then to move back. else to stop  and score to be calculated 
 
-initialiseAll()
-document.getElementById('ball').addEventListener('click',function(e){
-        console.log('passed');  
-        
-        alert('I was clicked');
-        console.log(`initial PositionPaddle1 now set to: x: ${paddle1Position.x} , y: ${paddle1Position.y}`); 
-     
-})
-
-
-
+//player 1 paddle to move automatically to the point where the ball will go to  X(0) position
+// based on the players arrow keys mmove paddle 2 to move back n forth
+//----------------------------------------------------------------------------------------------
