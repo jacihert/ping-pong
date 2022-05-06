@@ -1,9 +1,10 @@
 let interval = null;
+let scorePlayer = 0;
 
 let boardTop = 0;
 let boardBottom = window.innerHeight;
-let boardLeft = 20;
-let boardRight = window.innerWidth-20;
+let boardLeft = 40;
+let boardRight = window.innerWidth-40;
 
 const initialBallPositionLeft = window.innerWidth / 2;
 const initialBallPositionTop = window.innerHeight - 20;
@@ -12,10 +13,10 @@ let ballPositionTop = initialBallPositionTop;
 let dx = 1;
 let dy = 1;
 
-const Paddle1PositionLeft = '20 px';
+const Paddle1PositionLeft = 20;
 let Paddle1PositionTop = window.innerHeight / 2 - 40;
 
-const Paddle2PositionLeft = window.innerWidth-20-20 + 'px'
+const Paddle2PositionLeft = window.innerWidth-20-20 
 let initialPaddle2PositionTop = window.innerHeight / 2- 40;
 let Paddle2PositionTop = initialPaddle2PositionTop;
 
@@ -23,11 +24,11 @@ let Paddle2PositionTop = initialPaddle2PositionTop;
 //  initalise paddles & ball positions
 const initialiseAll = () => {
         //  initalise paddle positions
-    paddle1.style.left = Paddle1PositionLeft;
+    paddle1.style.left = Paddle1PositionLeft + "px";
     paddle1.style.top = Paddle1PositionTop + "px";
     
     Paddle2PositionTop = initialPaddle2PositionTop;
-    paddle2.style.left = Paddle2PositionLeft;
+    paddle2.style.left = Paddle2PositionLeft + 'px';
     paddle2.style.top = initialPaddle2PositionTop + "px";
     
         //   initalise ball  position
@@ -45,6 +46,11 @@ const initialiseAll = () => {
 
 //  Set the ball in motion
 const bouncingBall = () => {
+ 
+        if (ballPositionLeft+20 === Paddle2PositionLeft && (ballPositionTop >= Paddle2PositionTop && ballPositionTop <= Paddle2PositionTop+80)) {
+            scorePlayer += 1
+            document.getElementById("score2").innerHTML = scorePlayer    
+      }
   if (ballPositionLeft < boardLeft || ballPositionLeft > boardRight-20) {
     dx = -dx;
   }
