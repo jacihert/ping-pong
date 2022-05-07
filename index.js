@@ -1,6 +1,11 @@
 let interval = null;
+let ballHit = false;
+let ballBounce = false;
+
 let scorePlayer = 0;
 let scoreComputer = 0;
+
+let speed = 1 / 10
 
 let boardTop = 0;
 let boardBottom = window.innerHeight;
@@ -22,8 +27,9 @@ let initialPaddle2PositionTop = window.innerHeight / 2 - 40;
 let Paddle2PositionTop = initialPaddle2PositionTop;
 
 //  initalise paddles & ball positions
+
 const initialiseAll = () => {
-  //  initalise paddle positions
+  //  paddle 
   paddle1.style.left = Paddle1PositionLeft + "px";
   paddle1.style.top = Paddle1PositionTop + "px";
 
@@ -31,34 +37,58 @@ const initialiseAll = () => {
   paddle2.style.left = Paddle2PositionLeft + "px";
   paddle2.style.top = initialPaddle2PositionTop + "px";
 
-  //   initalise ball  position
+  //   ball
   ball.style.top = initialBallPositionTop + "px";
   ball.style.left = initialBallPositionLeft + "px";
   ballPositionLeft = initialBallPositionLeft;
   ballPositionTop = initialBallPositionTop;
   dx = 1;
   dy = 1;
-
-  //  set score
-//   document.getElementById("score1").innerHTML = 0;
-//   document.getElementById("score2").innerHTML = 0;
 };
 
 //  Set the ball in motion
 const bouncingBall = () => {
+  //  If the player paddle hits the ball, score points
   if (
     ballPositionLeft + 20 === Paddle2PositionLeft &&
     ballPositionTop >= Paddle2PositionTop &&
     ballPositionTop <= Paddle2PositionTop + 80
   ) {
-    scorePlayer += 1;
+      
+      // ball = "hit" or  ball = "bounce"   
+    if (!ballHit) {
+        ballHit = true
+        ballBounce = false
+    } else {
+      ballBounce = true;
+      ballHit = false
+    }
+
+      // score 
+    if (ballHit === true && ballBounce === false) {
+        scorePlayer += 1;
+    }
+
     document.getElementById("score2").innerHTML = scorePlayer;
   }
+  //  Get the computer paddle to hit the ball and score points
   if (
     ballPositionLeft === Paddle1PositionLeft+20
     ) {
     paddle1.style.top = ballPositionTop + "px";
+
+    // ball = "hit" or  ball = "bounce"   
+    if (!ballHit) {
+      ballHit = true
+      ballBounce = false
+  } else {
+    ballBounce = true;
+    ballHit = false
+  }
+    // score 
+  if (ballHit === true && ballBounce === false) {
     scoreComputer += 1;
+  }
     document.getElementById("score1").innerHTML = scoreComputer;
   }
   if (ballPositionLeft < boardLeft || ballPositionLeft > boardRight - 20) {
@@ -79,7 +109,7 @@ initialiseAll();
 document.addEventListener("keydown", (event) => {
   // Play
   if (!interval && (event.key === "P" || event.key === "p")) {
-    interval = setInterval(bouncingBall, 1 / 10);
+    interval = setInterval(bouncingBall, speed);
   }
   // Stop / pause
   if (event.key === "S" || event.key === "s") {
@@ -91,9 +121,9 @@ document.addEventListener("keydown", (event) => {
     clearInterval(interval);
     interval = null;
     initialiseAll();
-    interval = setInterval(bouncingBall, 1 / 10);
+    interval = setInterval(bouncingBall, speed);
   }
-  // move right paddle down
+  //  Move (right/ player) paddle down
   if (interval && event.key === "ArrowUp") {
     if (Paddle2PositionTop >= boardTop) {
       Paddle2PositionTop -= 15;
@@ -102,7 +132,7 @@ document.addEventListener("keydown", (event) => {
       paddle2.style.top = 0 + "px";
     }
   }
-  // //  move right paddle down
+  //  Move (right/ player) paddle
   if (interval && event.key === "ArrowDown") {
     if (Paddle2PositionTop + 80 < boardBottom) {
       Paddle2PositionTop += 15;
