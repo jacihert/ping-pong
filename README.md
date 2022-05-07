@@ -15,4 +15,4 @@ Game instructions : Use the following keys to play the game
   
 
 
-(Note: please refresh the page after maximising)
+(Note: please refresh the page after maximising / minimising)
