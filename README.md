@@ -1,5 +1,5 @@
-#ping-pong !  Have fun playing Ping-Pong with the computer :) 
-@built using Javascript
+# ping-pong !  Have fun playing Ping-Pong with the computer :) 
+@built using Javascript : [click here to check it out](https://jacihert.github.io/ping-pong/)
 
 
 > Game instructions : Use the following keys to play the game
